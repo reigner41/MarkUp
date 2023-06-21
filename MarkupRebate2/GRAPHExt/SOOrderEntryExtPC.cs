@@ -218,7 +218,7 @@ namespace PX.Objects.SO
                                     }
                                     if (mrkUpPricing.MarkupType == Percent)
                                     {
-                                        salesOrderPrice = mrkUpPricing.MarkupValue * replacementCostVal;
+                                        salesOrderPrice = ((mrkUpPricing.MarkupValue / 100) * replacementCostVal) + replacementCostVal;
                                     }
                                     else if (mrkUpPricing.MarkupType == Amount)
                                     {
@@ -513,7 +513,7 @@ namespace PX.Objects.SO
                                                     {
                                                         if (mrkUpTable.MarkupType == Percent)
                                                         {
-                                                            salesOrderPrice = mrkUpTable.MarkupValue * _ReplacementCost;
+                                                            salesOrderPrice = ((mrkUpTable.MarkupValue / 100)   * _ReplacementCost) + _ReplacementCost;
                                                         }
                                                         else if (mrkUpTable.MarkupType == Amount)
                                                         {

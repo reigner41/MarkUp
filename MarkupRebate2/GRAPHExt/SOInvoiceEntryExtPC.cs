@@ -103,7 +103,8 @@ namespace PX.Objects.SO
 
                             apGraph.Document.Cache.SetValueExt<APRegisterExtPC.usrSOInvoiceNbr>(newBill, ardoc.RefNbr);
                             apGraph.Document.Update(newBill);
-                            foreach (var subGrp in grp) {
+                            foreach (var subGrp in grp)
+                            {
                                 string descr = (string)subGrp.Value.TranDesc;
                                 string str = descr.Substring(0, 8);
                                 PXTrace.WriteInformation(str);
@@ -113,6 +114,8 @@ namespace PX.Objects.SO
                                 newBill.DocDesc = "Rebates from order/s:" + soNbrs;
                                 apGraph.Document.Update(newBill);
                             }
+                           
+
                             apGraph.Save.Press();
                         }
                     }
