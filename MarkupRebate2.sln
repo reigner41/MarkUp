@@ -2,40 +2,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PDC", "..\..\..\", "{712C1A06-F2C9-457C-9FBA-54BA17BE7440}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupRebate2", "MarkupRebate2\MarkupRebate2.csproj", "{9BC6D61A-5D4B-4D57-BC6B-5E3F9D04377E}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PDC", "http://localhost/PDC", "{FC24E494-AB82-4735-84CF-70B55671C136}"
 	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		ProjectReferences = "{9BC6D61A-5D4B-4D57-BC6B-5E3F9D04377E}|MarkupRebate2.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_4445"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\PDC\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4445\"
+		ProjectReferences = "{9bc6d61a-5d4b-4d57-bc6b-5e3f9d04377e}|MarkupRebate2.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/PDC"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\acusites\PDC\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\PDC\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_4445"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\PDC\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4445\"
+		Release.AspNetCompiler.VirtualPath = "/PDC"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\acusites\PDC\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\PDC\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "4445"
-		VWDDynamicPort = "false"
-		SlnRelativePath = "..\..\..\..\PDC\"
+		SlnRelativePath = "..\..\..\..\..\acusites\PDC\"
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupRebate2", "MarkupRebate2\MarkupRebate2.csproj", "{9BC6D61A-5D4B-4D57-BC6B-5E3F9D04377E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{712C1A06-F2C9-457C-9FBA-54BA17BE7440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{712C1A06-F2C9-457C-9FBA-54BA17BE7440}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BC6D61A-5D4B-4D57-BC6B-5E3F9D04377E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BC6D61A-5D4B-4D57-BC6B-5E3F9D04377E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC24E494-AB82-4735-84CF-70B55671C136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC24E494-AB82-4735-84CF-70B55671C136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

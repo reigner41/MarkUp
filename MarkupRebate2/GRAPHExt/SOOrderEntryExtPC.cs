@@ -107,19 +107,19 @@ namespace PX.Objects.SO
 
         protected void _(Events.RowPersisted<SOLine> e)
         {
-            SOLine row = e.Row;
+            //SOLine row = e.Row;
 
-            MarkupPricing markUpPricing = PXSelect<MarkupPricing, Where<MarkupPricing.customerID, Equal<Required<MarkupPricing.customerID>>,
-                     And<Where<MarkupPricing.effectiveDate, LessEqual<Required<MarkupPricing.effectiveDate>>,
-                     And<Where<MarkupPricing.replacementCost, Equal<Required<MarkupPricing.replacementCost>>>>>>>>
-                     .Select(Base, row.CustomerID, Base.Accessinfo.BusinessDate, 0);
+            //MarkupPricing markUpPricing = PXSelect<MarkupPricing, Where<MarkupPricing.customerID, Equal<Required<MarkupPricing.customerID>>,
+            //         And<Where<MarkupPricing.effectiveDate, LessEqual<Required<MarkupPricing.effectiveDate>>,
+            //         And<Where<MarkupPricing.replacementCost, Equal<Required<MarkupPricing.replacementCost>>>>>>>>
+            //         .Select(Base, row.CustomerID, Base.Accessinfo.BusinessDate, 0);
 
-            if (markUpPricing != null)
-            {
-                if (Base.Transactions.Ask(message: $"The replacement cost is zero. you want to proceed?", MessageButtons.OKCancel) != WebDialogResult.Cancel) { }
-                else
-                    return;
-            }
+            //if (markUpPricing != null)
+            //{
+            //    if (Base.Transactions.Ask(message: $"The replacement cost is zero. you want to proceed?", MessageButtons.OKCancel) != WebDialogResult.Cancel) { }
+            //    else
+            //        return;
+            //}
         }
 
         protected void _(Events.FieldUpdated<SOLine, SOLine.curyUnitPrice> e)
@@ -373,6 +373,12 @@ namespace PX.Objects.SO
                             decimal? mrkUpTableBreakBy = SelectFrom<MarkupPricing>.
                                Where<MarkupPricing.customerID.IsEqual<@P.AsInt>.
                                And<MarkupPricing.effectiveDate.IsLessEqual<@P.AsDateTime>>>.View.Select(Base, doc.CustomerID, Base.Accessinfo.BusinessDate).RowCast<MarkupPricing>().Where(x => x.QtyBreak <= row.OrderQty).Max(x => x.QtyBreak); // checking for break qty qualification
+                            if (row.InventoryID != oldRow.InventoryID && row.InventoryID != null || row.SiteID != oldRow.SiteID) {
+                                cache.SetValueExt<SOLineExtPC.usrStdCost>(row, row.CuryUnitCost);
+                                cache.SetValueExt<SOLineExtPC.usrStdPrice>(row, row.CuryUnitPrice);
+                                PXTrace.WriteInformation(row.CuryUnitCost.ToString());
+                                PXTrace.WriteInformation(row.CuryUnitPrice.ToString());
+                            }
                             if (mrkUpTableBreakBy != null)
                             {
                                 MarkupPricing mrkUpTable1 = SelectFrom<MarkupPricing>.
@@ -386,8 +392,9 @@ namespace PX.Objects.SO
                                 foreach (MarkupPricing mrkUpData in SelectFrom<MarkupPricing>.
                                     Where<MarkupPricing.qtyBreak.IsEqual<@P.AsInt>.
                                     And<MarkupPricing.customerID.IsEqual<@P.AsInt>.
+                                    And<MarkupPricing.siteID.IsEqual<@P.AsInt>.
                                     And<MarkupPricing.effectiveDate.IsLessEqual<@P.AsDateTime>.
-                                    And<MarkupPricing.inventoryID.IsNotNull>>>>.View.Select(Base, mrkUpTableBreakBy, doc.CustomerID, Base.Accessinfo.BusinessDate))
+                                    And<MarkupPricing.inventoryID.IsNotNull>>>>>.View.Select(Base, mrkUpTableBreakBy, doc.CustomerID, row.SiteID, Base.Accessinfo.BusinessDate))
                                 {
                                     if (mrkUpData.InventoryID != null)
                                     {
@@ -444,6 +451,7 @@ namespace PX.Objects.SO
                                             }
                                         }
                                     }
+
                                 }
                                 if (hasInventoryIDinMarkup == false)
                                 {
@@ -451,9 +459,10 @@ namespace PX.Objects.SO
                                     foreach (MarkupPricing mrkUpTable in SelectFrom<MarkupPricing>.
                                         Where<MarkupPricing.qtyBreak.IsEqual<@P.AsInt>.
                                         And<MarkupPricing.customerID.IsEqual<@P.AsInt>.
+                                        And<MarkupPricing.siteID.IsEqual<@P.AsInt>.
                                         And<MarkupPricing.effectiveDate.IsLessEqual<@P.AsDateTime>.
                                         And<MarkupPricing.inventoryID.IsNull.
-                                        And<MarkupPricing.itemClassID.IsNotNull>>>>>.View.Select(Base, mrkUpTableBreakBy, doc.CustomerID, Base.Accessinfo.BusinessDate))
+                                        And<MarkupPricing.itemClassID.IsNotNull>>>>>>.View.Select(Base, mrkUpTableBreakBy, doc.CustomerID, row.SiteID, Base.Accessinfo.BusinessDate))
                                     {
                                         if (mrkUpTable != null)
                                         {
@@ -541,6 +550,9 @@ namespace PX.Objects.SO
                                 }
                                 if (markUpisExpired == false && itemIsQualifiedForMarkup == true)
                                 {
+                                    if (_ReplacementCost ==  0) {
+                                        ReturnMarkUpReplaceMentCostUsed();
+                                    }
                                     cache.SetValueExt<SOLine.manualPrice>(row, true);
                                     cache.SetValueExt<SOLine.curyUnitPrice>(row, _SalesOrderPrice);
                                     cache.SetValueExt<SOLine.curyUnitCost>(row, _ReplacementCost);
@@ -563,6 +575,11 @@ namespace PX.Objects.SO
                 }
             }
             Base.Transactions.View.RequestRefresh();
+        }
+
+        private void ReturnMarkUpReplaceMentCostUsed() {
+            if (Base.Transactions.Ask(message: $"The replacement cost is zero. you want to proceed?", MessageButtons.OKCancel) != WebDialogResult.Cancel) { } else
+                return;
         }
         #endregion
     }
