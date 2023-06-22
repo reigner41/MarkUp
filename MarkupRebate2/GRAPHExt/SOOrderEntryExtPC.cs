@@ -423,7 +423,10 @@ namespace PX.Objects.SO
                                                                 if (mrkUpData.ExpirationDate < Base.Accessinfo.BusinessDate)
                                                                 {
                                                                     markUpisExpired = true;
+                                                                    continue;
                                                                 }
+                                                                else
+                                                                    markUpisExpired = false;
                                                             }
                                                             break; // return the value and exit the loop.
                                                         }
@@ -442,7 +445,10 @@ namespace PX.Objects.SO
                                                                 if (mrkUpData.ExpirationDate < Base.Accessinfo.BusinessDate)
                                                                 {
                                                                     markUpisExpired = true;
+                                                                    continue;
                                                                 }
+                                                                else
+                                                                    markUpisExpired = false;
                                                             }
                                                             break; // return the value and exit the loop.
                                                         }
@@ -535,7 +541,10 @@ namespace PX.Objects.SO
                                                         if (mrkUpTable.ExpirationDate < Base.Accessinfo.BusinessDate)
                                                         {
                                                             markUpisExpired = true;
+                                                            continue;
                                                         }
+                                                        else
+                                                            markUpisExpired = false;
                                                     }
                                                     itemIsQualifiedForMarkup = true;
                                                     break;

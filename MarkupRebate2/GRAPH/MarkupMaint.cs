@@ -223,7 +223,7 @@ namespace PrecisionCust
                             {
                                 hasError = true;
                                 // Acuminator disable once PX1050 HardcodedStringInLocalizationMethod [Justification]
-                                //sender.RaiseExceptionHandling<MarkupPricing.siteID>(row, row.SiteID, new PXSetPropertyException("Error: Warehouse cannot be empty.", PXErrorLevel.Error));
+                                sender.RaiseExceptionHandling<MarkupPricing.siteID>(row, row.SiteID, new PXSetPropertyException("Error: Warehouse cannot be empty.", PXErrorLevel.Error));
                             }
                         }
                     }
