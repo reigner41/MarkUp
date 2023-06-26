@@ -1,0 +1,6 @@
+﻿<Table TableName="APSetup">
+    <Column TableName="APSetup" ColumnName="UsrRebateNumberingID" ColumnType="string" AllowNull="True" MaxLength="10" DecimalPrecision="2" DecimalLength="10" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APSetup" ColumnName="UsrExpenseAccountID" ColumnType="int" AllowNull="True" MaxLength="25" DecimalPrecision="2" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APSetup" ColumnName="UsrLiabilityAccount" ColumnType="int" AllowNull="True" MaxLength="25" DecimalPrecision="2" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="APSetup" ColumnName="UsrRebateCostType" ColumnType="string" AllowNull="True" MaxLength="1" DecimalPrecision="2" DecimalLength="1" IsNewColumn="True" IsUnicode="True" />
+</Table>

@@ -152,7 +152,7 @@ namespace PrecisionCust
         [PXDBDecimal()]
         //[PXCheckUnique]
         [PXUIField(DisplayName = "Qty Break")]
-        [PXDefault(TypeCode.Decimal, "0.00", PersistingCheck = PXPersistingCheck.Nothing)]
+        [PXDefault(TypeCode.Decimal, "1.00", PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual Decimal? QtyBreak { get; set; }
         public abstract class qtyBreak : PX.Data.BQL.BqlDecimal.Field<qtyBreak> { }
         #endregion

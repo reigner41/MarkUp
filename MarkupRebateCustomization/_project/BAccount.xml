@@ -1,0 +1,6 @@
+﻿<Table TableName="BAccount">
+    <Column TableName="BAccount" ColumnName="UsrMarkup" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="BAccount" ColumnName="UsrMarkupPricing" ColumnType="bool" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="BAccount" ColumnName="UsrRebate" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+    <Column TableName="BAccount" ColumnName="UsrStandard" ColumnType="int" AllowNull="True" DecimalPrecision="0" DecimalLength="0" IsNewColumn="True" IsUnicode="True" />
+</Table>

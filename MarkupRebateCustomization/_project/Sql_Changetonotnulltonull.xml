@@ -1,0 +1,4 @@
+﻿<Sql TableName="Changetonotnulltonull" CustomScript="#CDATA">
+    <CDATA name="CustomScript"><![CDATA[ALTER TABLE MarkupPricing
+ALTER COLUMN InventoryID int  NULL;]]></CDATA>
+</Sql>

@@ -11,6 +11,7 @@ using PX.Objects.PO;
 using System.Collections.Generic;
 using PX.Common;
 using System.Linq;
+using PX.Objects.CN.Common.Extensions;
 
 namespace PrecisionCust
 {
@@ -164,6 +165,15 @@ namespace PrecisionCust
             sender.SetDefaultExt<MarkupPricing.replacementCost>(row); // trigger field defaulting for Replacement Cost field
             sender.SetDefaultExt<MarkupPricing.salesOrderPrice>(row); // trigger field defaulting in SalesOrderPrice
         }
+
+        protected void _(Events.FieldUpdating<MarkupPricing, MarkupPricing.qtyBreak> e) {
+            var row = e.Row as MarkupPricing;
+            if (row == null) return;
+            if (Convert.ToInt32(e.NewValue) == 0) {
+                e.NewValue = 1m;
+            }
+        }
+
 
         protected void _(Events.FieldUpdated<MarkupPricing, MarkupPricing.markupType> e)
         {

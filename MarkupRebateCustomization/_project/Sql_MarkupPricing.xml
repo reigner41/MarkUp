@@ -1,0 +1,33 @@
+﻿<Sql TableName="MarkupPricing" TableSchemaXml="#CDATA">
+    <CDATA name="TableSchemaXml"><![CDATA[<table name="MarkupPricing">
+  <col name="CompanyID" type="Int" default="Zero" />
+  <col name="MarkupID" type="Int" identity="true" />
+  <col name="MarkupCD" type="NVarChar(255)" nullable="true" />
+  <col name="BranchID" type="Int" nullable="true" />
+  <col name="CustomerID" type="Int" nullable="true" />
+  <col name="MarkupType" type="Char(1)" nullable="true" />
+  <col name="MarkupValue" type="Decimal(19,6)" nullable="true" />
+  <col name="IsActive" type="Bit" nullable="true" />
+  <col name="ItemClassID" type="Int" nullable="true" />
+  <col name="InventoryID" type="Int" />
+  <col name="QtyBreak" type="Decimal(19,6)" nullable="true" />
+  <col name="ReplacementCost" type="Decimal(19,6)" nullable="true" />
+  <col name="SalesOrderPrice" type="Decimal(19,6)" nullable="true" />
+  <col name="EffectiveDate" type="DateTime" nullable="true" />
+  <col name="ExpirationDate" type="DateTime" nullable="true" />
+  <col name="CreatedByID" type="UniqueIdentifier" />
+  <col name="CreatedByScreenID" type="Char(8)" />
+  <col name="CreatedDateTime" type="DateTime" />
+  <col name="LastModifiedByID" type="UniqueIdentifier" />
+  <col name="LastModifiedByScreenID" type="Char(8)" />
+  <col name="LastModifiedDateTime" type="DateTime" />
+  <col name="tstamp" type="Timestamp" />
+  <col name="SiteID" type="Int" nullable="true" />
+  <col name="ChildMarkupID" type="Char(1)" nullable="true" />
+  <col name="LineNbr" type="Int" nullable="true" />
+  <index name="PK_MarkupPricing" clustered="true" primary="true" unique="true">
+    <col name="CompanyID" />
+    <col name="MarkupID" />
+  </index>
+</table>]]></CDATA>
+</Sql>

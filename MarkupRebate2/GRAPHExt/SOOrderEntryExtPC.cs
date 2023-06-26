@@ -465,10 +465,9 @@ namespace PX.Objects.SO
                                     foreach (MarkupPricing mrkUpTable in SelectFrom<MarkupPricing>.
                                         Where<MarkupPricing.qtyBreak.IsEqual<@P.AsInt>.
                                         And<MarkupPricing.customerID.IsEqual<@P.AsInt>.
-                                        And<MarkupPricing.siteID.IsEqual<@P.AsInt>.
                                         And<MarkupPricing.effectiveDate.IsLessEqual<@P.AsDateTime>.
                                         And<MarkupPricing.inventoryID.IsNull.
-                                        And<MarkupPricing.itemClassID.IsNotNull>>>>>>.View.Select(Base, mrkUpTableBreakBy, doc.CustomerID, row.SiteID, Base.Accessinfo.BusinessDate))
+                                        And<MarkupPricing.itemClassID.IsNotNull>>>>>.View.Select(Base, mrkUpTableBreakBy, doc.CustomerID, Base.Accessinfo.BusinessDate))
                                     {
                                         if (mrkUpTable != null)
                                         {
@@ -485,12 +484,24 @@ namespace PX.Objects.SO
                                                     {
                                                         if (invCurSetExt.UsrReplacementCst == MarkupMaint.LastPrice)
                                                         {
-                                                            INItemCost itemCst = SelectFrom<INItemCost>.
-                                                                Where<INItemCost.inventoryID.IsEqual<@P.AsInt>.
-                                                                And<INItemCost.curyID.IsEqual<@P.AsString>>>.View.Select(Base, invCurSet.InventoryID, invCurSet.CuryID); // get last price from Stock Items Last Cost
-                                                            if (itemCst != null)
-                                                            {
-                                                                replacementCostVal = itemCst.LastCost;
+                                                            ////INItemSite
+                                                            //INItemCost itemCst = SelectFrom<INItemCost>.
+                                                            //    Where<INItemCost.inventoryID.IsEqual<@P.AsInt>.
+                                                            //    And<INItemCost.curyID.IsEqual<@P.AsString>>>.View.Select(Base, invCurSet.InventoryID, invCurSet.CuryID); // get last price from Stock Items Last Cost
+                                                            //if (itemCst != null)
+                                                            //{
+                                                            //    replacementCostVal = itemCst.LastCost;
+                                                            //    markupID = mrkUpTable.MarkupID;
+                                                            //}
+                                                            INItemSite itemSite = SelectFrom<INItemSite>.
+                                                               Where<INItemSite.inventoryID.IsEqual<@P.AsInt>.
+                                                               And<INItemSite.siteID.IsEqual<@P.AsInt>>>.View.Select(Base, row.InventoryID, row.SiteID); // get default avg cost from default warehouse of item.
+                                                            if (itemSite != null) {
+                                                                if (itemSite.LastCost != null || itemSite.LastCost != 0) {
+                                                                    replacementCostVal = itemSite.LastCost;
+                                                                } else {
+                                                                    replacementCostVal = itemSite.LastStdCost;
+                                                                }
                                                                 markupID = mrkUpTable.MarkupID;
                                                             }
                                                         }
@@ -510,6 +521,7 @@ namespace PX.Objects.SO
                                                         {
                                                             if (invCurSet.PreferredVendorID != null) // default vendor of item.
                                                             {
+                                                                //TODO Add is default
                                                                 POVendorInventory poVendor = SelectFrom<POVendorInventory>.
                                                                     Where<POVendorInventory.vendorID.IsEqual<@P.AsInt>.
                                                                     And<POVendorInventory.inventoryID.IsEqual<@P.AsInt>>>.View.Select(Base, invCurSet.PreferredVendorID, row.InventoryID);
